@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class JavaFileGenerator {
     public static void main(String[] args) {
-        String tableName = "campus_career"; // Nombre de la tabla
+        String tableName = "university"; // Nombre de la tabla
         String folderPath = "app/src/main/java/Test_Project/Models/"; // Ruta de la carpeta donde se creará el archivo
 
         // Configuración de la conexión a la base de datos
@@ -27,6 +27,7 @@ public class JavaFileGenerator {
             // Generar código Java
             StringBuilder codeBuilder = new StringBuilder();
             codeBuilder.append("package Test_Project.Models;").append("\n");
+            codeBuilder.append("import com.fasterxml.jackson.annotation.JsonProperty;").append("\n");
             codeBuilder.append("import java.sql.Timestamp;").append("\n");
             codeBuilder.append("import java.sql.Date;").append("\n");
             codeBuilder.append("public class ").append(toCamelCase(tableName)).append(" {\n");
@@ -36,6 +37,7 @@ public class JavaFileGenerator {
             while (resultSet.next()) {
                 String columnName = resultSet.getString("COLUMN_NAME");
                 String columnType = atributeType.getType(resultSet.getString("TYPE_NAME"));
+                codeBuilder.append("\t@JsonProperty(").append('"' + columnName + '"').append(")\n");
                 codeBuilder.append("\tprivate ").append(columnType).append(" ").append(columnName).append(";\n");
                 // Generar el getter
                 codeBuilder.append("\tpublic ").append(columnType).append(" get").append(toCamelCase(columnName))
