@@ -3,7 +3,10 @@
  */
 package Test_Project;
 
-import Test_Project.Utils.Campus;
+import Test_Project.Models.Branch;
+import Test_Project.Models.Campus;
+import Test_Project.Models.Career;
+import Test_Project.Utils.DBConnection;
 import Test_Project.Utils.JsonDataFetcher;
 
 public class App {
@@ -13,16 +16,19 @@ public class App {
 
     public static void main(String[] args) {
         try {
-            Campus campus = JsonDataFetcher.fetchTableData(Campus.getTABLENAME(), "id_campus = 2", Campus.class);
-            System.out.println(campus.getId_campus());
-            System.out.println(campus.getId_university());
-            System.out.println(campus.getName());
-            System.out.println(campus.getLocation());
-            System.out.println(campus.getLatitude() + " " + campus.getLongitude());
-            System.out.println(campus.getMain() == 1 ? "Sede Principal" : "Sede secundaria");
-            System.out.println(campus.getWww());
-            System.out.println(campus.getEmail());
-
+            Career test = JsonDataFetcher.fetchTableData(
+                Career.getTABLENAME(),
+                "id_career = 83",
+                Career.class);
+            System.out.println("Id carrera: " + test.getId_career());
+            System.out.println("Nombre: " + test.getName());
+            System.out.println("Titulo intermedio: " + (test.getTitle_intermediate() == 1 ? "Título intermedio" : "Sin titulo intermedio"));
+            System.out.println("Descripción: " + test.getDescription());
+            System.out.println("Duración(meses): " + test.getDuration_months());
+            System.out.println("Tipo de carrera: " + test.getId_type_career());
+            System.out.println("Modalidad: " + test.getId_modality());
+            System.out.println("Rama: " + test.getId_branch());
+            System.out.println("Rango: " + test.getId_range());
         } catch (Exception e) {
             e.printStackTrace();
         }

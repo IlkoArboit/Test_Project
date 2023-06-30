@@ -1,4 +1,4 @@
-package Test_Project.Utils;
+package Test_Project.Models;
 
 import java.util.Date;
 

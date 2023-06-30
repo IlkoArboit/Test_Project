@@ -1,4 +1,4 @@
-package Test_Project.Utils;
+package Test_Project.Models;
 
 public class Branch {
     private final static String TABLENAME = "branch";
